@@ -4,11 +4,13 @@
     "dev": "bun run --hot src/index.ts | crowlog-pretty"
   },
   "dependencies": {
+    "@prisma/client": "^6.11.1",
     "better-auth": "^1.2.12",
     "hono": "^4.8.4"
   },
   "devDependencies": {
     "@biomejs/biome": "2.1.1",
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "prisma": "^6.11.1"
   }
 }
