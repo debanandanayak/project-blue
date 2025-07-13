@@ -1,18 +1,18 @@
-import { redirect } from 'next/navigation';
-import { AppSidebar } from '@/components/app-sidebar';
-import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
+import { redirect } from 'next/navigation'
+import { AppSidebar } from '@/components/app-sidebar'
+import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar'
 
 type Team = {
-	name: string;
-	logo: string;
-	plan: string;
-	url: string;
-};
+	name: string
+	logo: string
+	plan: string
+	url: string
+}
 
 export default async function RootLayout({
 	children,
 }: Readonly<{
-	children: React.ReactNode;
+	children: React.ReactNode
 }>) {
 	const teams: Team[] = [
 		{
@@ -21,9 +21,9 @@ export default async function RootLayout({
 			plan: 'hobby',
 			url: 'my-team',
 		},
-	];
+	]
 	if (teams.length === 0) {
-		redirect('/team/new');
+		redirect('/team/new')
 	}
 	const data = {
 		user: {
@@ -59,7 +59,7 @@ export default async function RootLayout({
 				items: [],
 			},
 		],
-	};
+	}
 	return (
 		<SidebarProvider>
 			<AppSidebar
@@ -73,5 +73,5 @@ export default async function RootLayout({
 				</div>
 			</SidebarInset>
 		</SidebarProvider>
-	);
+	)
 }

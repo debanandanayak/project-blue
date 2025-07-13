@@ -1,4 +1,4 @@
-import type { Component } from 'solid-js';
+import type { Component } from 'solid-js'
 
 export const ComingSoonPage: Component = () => {
 	return (
@@ -9,5 +9,5 @@ export const ComingSoonPage: Component = () => {
 				This feature is coming soon, please check back later.
 			</div>
 		</div>
-	);
-};
+	)
+}

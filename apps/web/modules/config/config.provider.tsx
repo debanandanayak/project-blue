@@ -1,51 +1,51 @@
-import { useQuery } from '@tanstack/solid-query';
-import { merge } from 'lodash-es';
-import type { ParentComponent } from 'solid-js';
-import { createContext, Match, Switch, useContext } from 'solid-js';
-import { Button } from '../ui/components/button';
-import { EmptyState } from '../ui/components/empty';
-import { createToast } from '../ui/components/sonner';
-import type { Config, RuntimePublicConfig } from './config';
-import { buildTimeConfig } from './config';
-import { fetchPublicConfig } from './config.services';
+import { useQuery } from '@tanstack/solid-query'
+import { merge } from 'lodash-es'
+import type { ParentComponent } from 'solid-js'
+import { createContext, Match, Switch, useContext } from 'solid-js'
+import { Button } from '../ui/components/button'
+import { EmptyState } from '../ui/components/empty'
+import { createToast } from '../ui/components/sonner'
+import type { Config, RuntimePublicConfig } from './config'
+import { buildTimeConfig } from './config'
+import { fetchPublicConfig } from './config.services'
 
 const ConfigContext = createContext<{
-	config: Config;
-}>();
+	config: Config
+}>()
 
 export function useConfig() {
-	const context = useContext(ConfigContext);
+	const context = useContext(ConfigContext)
 
 	if (!context) {
 		throw new Error(
 			'Config context not found, make sure you are using useConfig inside ConfigProvider',
-		);
+		)
 	}
 
-	return context;
+	return context
 }
 
 export const ConfigProvider: ParentComponent = (props) => {
 	const query = useQuery(() => ({
 		queryKey: ['config'],
 		queryFn: fetchPublicConfig,
-	}));
+	}))
 
 	const mergeConfigs = (runtimeConfig: RuntimePublicConfig): Config => {
-		return merge({}, buildTimeConfig, runtimeConfig);
-	};
+		return merge({}, buildTimeConfig, runtimeConfig)
+	}
 
 	const retry = async () => {
-		const result = await query.refetch();
+		const result = await query.refetch()
 
 		if (result.error) {
 			createToast({
 				message: 'Server still unreachable',
 				description: 'The server remains unreachable, try again later.',
 				type: 'error',
-			});
+			})
 		}
-	};
+	}
 
 	return (
 		<Switch>
@@ -72,5 +72,5 @@ export const ConfigProvider: ParentComponent = (props) => {
 				)}
 			</Match>
 		</Switch>
-	);
-};
+	)
+}

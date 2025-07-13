@@ -1,12 +1,12 @@
-import type { FetchOptions, ResponseType } from 'ofetch';
-import { ofetch } from 'ofetch';
-import { demoHttpClient } from '@/modules/demo/demo-http-client';
+import type { FetchOptions, ResponseType } from 'ofetch'
+import { ofetch } from 'ofetch'
+import { demoHttpClient } from '@/modules/demo/demo-http-client'
 
-export type { ResponseType };
+export type { ResponseType }
 export type HttpClientOptions<R extends ResponseType = 'json'> = Omit<
 	FetchOptions<R>,
 	'baseURL'
-> & { url: string; baseUrl?: string };
+> & { url: string; baseUrl?: string }
 
 function baseHttpClient<A, R extends ResponseType = 'json'>({
 	url,
@@ -16,7 +16,7 @@ function baseHttpClient<A, R extends ResponseType = 'json'>({
 	return ofetch<A, R>(url, {
 		baseURL: baseUrl,
 		...rest,
-	});
+	})
 }
 
-export const httpClient = demoHttpClient;
+export const httpClient = demoHttpClient

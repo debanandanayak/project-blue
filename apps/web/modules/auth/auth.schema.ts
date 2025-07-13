@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from 'zod'
 
 export const loginSchema = z.object({
 	email: z
@@ -9,7 +9,7 @@ export const loginSchema = z.object({
 		.string()
 		.min(4, 'Password must be at least 4 character')
 		.max(10, 'Password must be at least 256 character'),
-});
+})
 
 export const signupSchema = z.object({
 	email: z
@@ -20,4 +20,4 @@ export const signupSchema = z.object({
 		.string()
 		.min(4, 'Password must be at least 4 character')
 		.max(10, 'Password must be at least 256 character'),
-});
+})

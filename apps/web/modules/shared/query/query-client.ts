@@ -1,4 +1,4 @@
-import { QueryClient } from '@tanstack/solid-query';
+import { QueryClient } from '@tanstack/solid-query'
 
 export const queryClient = new QueryClient({
 	defaultOptions: {
@@ -15,8 +15,8 @@ export const queryClient = new QueryClient({
 			retry: false,
 		},
 	},
-});
+})
 
 export function clearQueryCache() {
-	queryClient.clear();
+	queryClient.clear()
 }

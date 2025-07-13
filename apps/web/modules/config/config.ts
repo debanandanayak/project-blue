@@ -1,19 +1,19 @@
-export const isDev = process.env.MODE === 'development';
+export const isDev = process.env.MODE === 'development'
 
 const asBoolean = (value: string | undefined, defaultValue: boolean) =>
-	value === undefined ? defaultValue : value.trim().toLowerCase() === 'true';
+	value === undefined ? defaultValue : value.trim().toLowerCase() === 'true'
 const asString = <T extends string | undefined>(
 	value: string | undefined,
 	defaultValue?: T,
 ): T extends undefined ? string | undefined : string =>
-	(value ?? defaultValue) as T extends undefined ? string | undefined : string;
+	(value ?? defaultValue) as T extends undefined ? string | undefined : string
 const asNumber = <T extends number | undefined>(
 	value: string | undefined,
 	defaultValue?: T,
 ): T extends undefined ? number | undefined : number =>
 	(value === undefined ? defaultValue : Number(value)) as T extends undefined
 		? number | undefined
-		: number;
+		: number
 
 export const buildTimeConfig = {
 	papraVersion: asString(process.env.VITE_PAPRA_VERSION, '0.0.0'),
@@ -61,9 +61,9 @@ export const buildTimeConfig = {
 				),
 			},
 			customs: [] as {
-				providerId: string;
-				providerName: string;
-				providerIconUrl: string;
+				providerId: string
+				providerName: string
+				providerIconUrl: string
 			}[],
 		},
 	},
@@ -85,7 +85,7 @@ export const buildTimeConfig = {
 		process.env.VITE_IS_SUBSCRIPTIONS_ENABLED,
 		false,
 	),
-} as const;
+} as const
 
-export type Config = typeof buildTimeConfig;
-export type RuntimePublicConfig = Pick<Config, 'auth'>;
+export type Config = typeof buildTimeConfig
+export type RuntimePublicConfig = Pick<Config, 'auth'>

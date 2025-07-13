@@ -1,10 +1,10 @@
-import { A } from '@solidjs/router';
-import type { Component } from 'solid-js';
-import { useI18n } from '@/modules/i18n/i18n.provider';
-import { Button } from '@/modules/ui/components/button';
+import { A } from '@solidjs/router'
+import type { Component } from 'solid-js'
+import { useI18n } from '@/modules/i18n/i18n.provider'
+import { Button } from '@/modules/ui/components/button'
 
 export const NotFoundPage: Component = () => {
-	const { t } = useI18n();
+	const { t } = useI18n()
 	return (
 		<div class="h-screen flex flex-col items-center justify-center p-6">
 			<div class="flex items-center flex-row sm:gap-24">
@@ -22,5 +22,5 @@ export const NotFoundPage: Component = () => {
 				</div>
 			</div>
 		</div>
-	);
-};
+	)
+}

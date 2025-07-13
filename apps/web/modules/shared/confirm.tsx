@@ -1,6 +1,6 @@
-import type { JSX, ParentComponent } from 'solid-js';
-import { createContext, createSignal, useContext } from 'solid-js';
-import { Button } from '../ui/components/button';
+import type { JSX, ParentComponent } from 'solid-js'
+import { createContext, createSignal, useContext } from 'solid-js'
+import { Button } from '../ui/components/button'
 import {
 	Dialog,
 	DialogContent,
@@ -8,43 +8,43 @@ import {
 	DialogFooter,
 	DialogHeader,
 	DialogTitle,
-} from '../ui/components/dialog';
+} from '../ui/components/dialog'
 
 type ConfirmModalConfig = {
-	title: JSX.Element | string;
-	message?: JSX.Element | string;
+	title: JSX.Element | string
+	message?: JSX.Element | string
 	confirmButton?: {
-		text?: string;
-		variant?: 'default' | 'destructive';
-	};
+		text?: string
+		variant?: 'default' | 'destructive'
+	}
 	cancelButton?: {
-		text?: string;
-		variant?: 'default' | 'secondary';
-	};
-};
+		text?: string
+		variant?: 'default' | 'secondary'
+	}
+}
 
 const ConfirmModalContext = createContext<{
-	confirm: (config: ConfirmModalConfig) => Promise<boolean>;
-}>(undefined);
+	confirm: (config: ConfirmModalConfig) => Promise<boolean>
+}>(undefined)
 
 export function useConfirmModal() {
-	const context = useContext(ConfirmModalContext);
+	const context = useContext(ConfirmModalContext)
 
 	if (!context) {
 		throw new Error(
 			'useConfirmModal must be used within a ConfirmModalProvider',
-		);
+		)
 	}
 
-	return context;
+	return context
 }
 
 export const ConfirmModalProvider: ParentComponent = (props) => {
-	const [getIsOpen, setIsOpen] = createSignal(false);
-	const [getConfig, setConfig] = createSignal<ConfirmModalConfig | undefined>();
+	const [getIsOpen, setIsOpen] = createSignal(false)
+	const [getConfig, setConfig] = createSignal<ConfirmModalConfig | undefined>()
 	const [getResolve, setResolve] = createSignal<
 		((isConfirmed: boolean) => void) | undefined
-	>();
+	>()
 
 	const confirm = ({
 		title,
@@ -63,25 +63,25 @@ export const ConfirmModalProvider: ParentComponent = (props) => {
 				text: cancelButton?.text ?? 'Cancel',
 				variant: cancelButton?.variant ?? 'secondary',
 			},
-		});
-		setIsOpen(true);
+		})
+		setIsOpen(true)
 
 		return new Promise<boolean>((resolve) => {
-			setResolve(() => resolve);
-		});
-	};
+			setResolve(() => resolve)
+		})
+	}
 
 	function onOpenChange(isOpen: boolean) {
 		if (!isOpen) {
-			getResolve()?.(false);
+			getResolve()?.(false)
 		}
 
-		setIsOpen(isOpen);
+		setIsOpen(isOpen)
 	}
 
 	function handleConfirm({ isConfirmed }: { isConfirmed: boolean }) {
-		getResolve()?.(isConfirmed);
-		setIsOpen(false);
+		getResolve()?.(isConfirmed)
+		setIsOpen(false)
 	}
 
 	return (
@@ -116,5 +116,5 @@ export const ConfirmModalProvider: ParentComponent = (props) => {
 
 			{props.children}
 		</ConfirmModalContext.Provider>
-	);
-};
+	)
+}

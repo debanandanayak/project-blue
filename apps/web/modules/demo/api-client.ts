@@ -1,54 +1,54 @@
-import { safely } from '@corentinth/chisels';
-import { get } from 'lodash-es';
-import type { HttpClientOptions, ResponseType } from './http-client';
-import { httpClient } from './http-client';
-export { isHttpErrorWithCode, isHttpErrorWithStatusCode, isRateLimitError };
+import { safely } from '@corentinth/chisels'
+import { get } from 'lodash-es'
+import type { HttpClientOptions, ResponseType } from './http-client'
+import { httpClient } from './http-client'
+export { isHttpErrorWithCode, isHttpErrorWithStatusCode, isRateLimitError }
 
 function isHttpErrorWithCode({
 	error,
 	code,
 }: {
-	error: unknown;
-	code: string;
+	error: unknown
+	code: string
 }) {
-	return get(error, 'data.error.code') === code;
+	return get(error, 'data.error.code') === code
 }
 
 function isHttpErrorWithStatusCode({
 	error,
 	statusCode,
 }: {
-	error: unknown;
-	statusCode: number;
+	error: unknown
+	statusCode: number
 }) {
-	return get(error, 'status') === statusCode;
+	return get(error, 'status') === statusCode
 }
 
 function isRateLimitError({ error }: { error: unknown }) {
-	return isHttpErrorWithStatusCode({ error, statusCode: 429 });
+	return isHttpErrorWithStatusCode({ error, statusCode: 429 })
 }
 export async function apiClient<T, R extends ResponseType = 'json'>({
 	path,
 	...rest
 }: {
-	path: string;
+	path: string
 } & Omit<HttpClientOptions<R>, 'url'>) {
 	const requestConfig: HttpClientOptions<R> = {
 		baseUrl: 'http://localhost:3000',
 		url: path,
 		credentials: 'include',
 		...rest,
-	};
+	}
 
-	const [response, error] = await safely(httpClient<T, R>(requestConfig));
+	const [response, error] = await safely(httpClient<T, R>(requestConfig))
 
 	if (isHttpErrorWithStatusCode({ error, statusCode: 401 })) {
-		window.location.href = '/login';
+		window.location.href = '/login'
 	}
 
 	if (error) {
-		throw error;
+		throw error
 	}
 
-	return response;
+	return response
 }

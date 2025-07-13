@@ -1,7 +1,7 @@
-import Form from 'next/form';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import Form from 'next/form'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
 export default async function NewTeam() {
 	return (
 		<div className="relative">
@@ -57,5 +57,5 @@ export default async function NewTeam() {
 				</div>
 			</div>
 		</div>
-	);
+	)
 }
