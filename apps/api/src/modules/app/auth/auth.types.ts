@@ -1,3 +1,3 @@
-import type { Auth } from './auth.services';
+import type { Auth } from './auth.services'
 
-export type Session = Auth['$Infer']['Session']['session'];
+export type Session = Auth['$Infer']['Session']['session']

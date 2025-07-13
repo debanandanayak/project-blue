@@ -1,8 +1,8 @@
-import { betterAuth } from 'better-auth';
-import { prismaAdapter } from 'better-auth/adapters/prisma';
-import { apiKey, organization } from 'better-auth/plugins';
+import { betterAuth } from 'better-auth'
+import { prismaAdapter } from 'better-auth/adapters/prisma'
+import { organization } from 'better-auth/plugins'
 // If your Prisma file is located elsewhere, you can change the path
-import client from '@/src/client';
+import client from '@/src/client'
 
 export const auth = betterAuth({
 	database: prismaAdapter(client, {
@@ -22,4 +22,4 @@ export const auth = betterAuth({
 		},
 	},
 	plugins: [organization()],
-});
+})

@@ -2,16 +2,22 @@
   "name": "api",
   "scripts": {
     "dev": "bun run --hot src/index.ts | crowlog-pretty",
-    "lint":"biome check src",
-    "format":"biome check --write src"
+    "lint": "biome check src",
+    "format": "biome check --write src"
   },
   "dependencies": {
+    "@crowlog/async-context-plugin": "^1.2.1",
+    "@crowlog/logger": "^1.2.1",
+    "@paralleldrive/cuid2": "^2.2.2",
     "@prisma/client": "^6.11.1",
     "better-auth": "^1.2.12",
+    "c12": "^3.0.4",
+    "figue": "^2.2.3",
     "hono": "^4.8.4"
   },
   "devDependencies": {
     "@biomejs/biome": "2.1.1",
+    "@crowlog/pretty": "^1.2.1",
     "@types/bun": "latest",
     "prisma": "^6.11.1"
   }

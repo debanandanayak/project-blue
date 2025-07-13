@@ -1,8 +1,8 @@
-import type { DeepPartial } from '@corentinth/chisels';
-import { describe, expect, test } from 'vitest';
-import { getPublicConfig } from './config.models';
-import { overrideConfig } from './config.test-utils';
-import type { Config } from './config.types';
+import type { DeepPartial } from '@corentinth/chisels'
+import { describe, expect, test } from 'vitest'
+import { getPublicConfig } from './config.models'
+import { overrideConfig } from './config.test-utils'
+import type { Config } from './config.types'
 
 describe('config models', () => {
 	describe('getPublicConfig', () => {
@@ -41,7 +41,7 @@ describe('config models', () => {
 				intakeEmails: {
 					isEnabled: true,
 				},
-			} as DeepPartial<Config>);
+			} as DeepPartial<Config>)
 
 			expect(getPublicConfig({ config })).to.eql({
 				publicConfig: {
@@ -70,7 +70,7 @@ describe('config models', () => {
 						isEnabled: true,
 					},
 				},
-			});
-		});
-	});
-});
+			})
+		})
+	})
+})
