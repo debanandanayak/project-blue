@@ -1,10 +1,10 @@
-import {PrismaClient} from "@prisma/client"
+import { PrismaClient } from '@prisma/client';
 
-interface CustomNodeJsGlobal extends Global{
-    prisma:PrismaClient
+interface CustomNodeJsGlobal extends Global {
+	prisma: PrismaClient;
 }
-declare const global :CustomNodeJsGlobal
+declare const global: CustomNodeJsGlobal;
 
-const prisma = global.prisma || new PrismaClient()
+const prisma = global.prisma || new PrismaClient();
 
-export default prisma
+export default prisma;
