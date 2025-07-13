@@ -1,8 +1,6 @@
-import { EmptyScreen } from '@/components/layout/empty-screen'
-import React from 'react'
+import React from 'react';
+import { EmptyScreen } from '@/components/layout/empty-screen';
 
 export default function page() {
-  return (
-    <EmptyScreen headline={"No email found"} />
-  )
+	return <EmptyScreen headline={'No email found'} />;
 }

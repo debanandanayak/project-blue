@@ -1,21 +1,21 @@
 export function promptUploadFiles({
-  acceptedTypes,
+	acceptedTypes,
 }: {
-  acceptedTypes?: string;
+	acceptedTypes?: string;
 } = {}): Promise<{ files: File[] }> {
-  return new Promise((resolve) => {
-    const input = document.createElement('input');
-    input.type = 'file';
-    input.multiple = true;
+	return new Promise((resolve) => {
+		const input = document.createElement('input');
+		input.type = 'file';
+		input.multiple = true;
 
-    if (acceptedTypes) {
-      input.accept = acceptedTypes;
-    }
+		if (acceptedTypes) {
+			input.accept = acceptedTypes;
+		}
 
-    input.onchange = () => {
-      resolve({ files: [...input.files ?? []] });
-    };
+		input.onchange = () => {
+			resolve({ files: [...(input.files ?? [])] });
+		};
 
-    input.click();
-  });
+		input.click();
+	});
 }
