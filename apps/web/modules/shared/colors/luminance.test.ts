@@ -1,5 +1,5 @@
-import { describe, expect, test } from 'vitest';
-import { getLuminance } from './luminance';
+import { describe, expect, test } from 'vitest'
+import { getLuminance } from './luminance'
 
 describe('luminance', () => {
 	describe('getLuminance', () => {
@@ -10,11 +10,11 @@ describe('luminance', () => {
 
           Source: https://www.w3.org/TR/WCAG20/#relativeluminancedef
       `, () => {
-			expect(getLuminance('#000000')).toBe(0);
-			expect(getLuminance('#FFFFFF')).toBe(1);
-			expect(getLuminance('#FF0000')).toBeCloseTo(0.2126, 4);
-			expect(getLuminance('#00FF00')).toBeCloseTo(0.7152, 4);
-			expect(getLuminance('#0000FF')).toBeCloseTo(0.0722, 4);
-		});
-	});
-});
+			expect(getLuminance('#000000')).toBe(0)
+			expect(getLuminance('#FFFFFF')).toBe(1)
+			expect(getLuminance('#FF0000')).toBeCloseTo(0.2126, 4)
+			expect(getLuminance('#00FF00')).toBeCloseTo(0.7152, 4)
+			expect(getLuminance('#0000FF')).toBeCloseTo(0.0722, 4)
+		})
+	})
+})

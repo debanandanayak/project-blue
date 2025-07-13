@@ -1,18 +1,18 @@
-import { Search } from 'lucide-react';
-import { AppHeader } from '@/components/app-header';
-import { Input } from '@/components/ui/input';
-import { ScrollArea } from '@/components/ui/scroll-area';
+import { Search } from 'lucide-react'
+import { AppHeader } from '@/components/app-header'
+import { Input } from '@/components/ui/input'
+import { ScrollArea } from '@/components/ui/scroll-area'
 
 type WorkspacePropType = {
-	slug: string;
-};
+	slug: string
+}
 
 export default async function Page({
 	params,
 }: {
-	params: Promise<WorkspacePropType>;
+	params: Promise<WorkspacePropType>
 }) {
-	const { slug } = await params;
+	const { slug } = await params
 	return (
 		<div className="h-full flex flex-col">
 			<div className="border-b flex-shrink-0">
@@ -46,5 +46,5 @@ export default async function Page({
 				</div>
 			</ScrollArea>
 		</div>
-	);
+	)
 }

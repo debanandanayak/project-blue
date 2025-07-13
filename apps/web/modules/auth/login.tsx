@@ -1,18 +1,18 @@
-import { GalleryVerticalEnd, Heading1, Loader2Icon } from 'lucide-react';
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
-import type { RuntimePublicConfig } from '@/modules/config/config';
-import EmailPasswordLoginForm from './login-form';
+import { GalleryVerticalEnd, Heading1, Loader2Icon } from 'lucide-react'
+import Link from 'next/link'
+import { Button } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
+import type { RuntimePublicConfig } from '@/modules/config/config'
+import EmailPasswordLoginForm from './login-form'
 
 export function LoginForm({
 	className,
 	config,
 	...props
 }: React.ComponentProps<'div'> & { config: RuntimePublicConfig }) {
-	const { auth: authConfig } = config;
-	console.log(authConfig);
-	const isloading = true;
+	const { auth: authConfig } = config
+	console.log(authConfig)
+	const isloading = true
 	return (
 		<div className={cn('flex flex-col gap-6', className)} {...props}>
 			<div>
@@ -78,5 +78,5 @@ export function LoginForm({
 				and <a href="#">Privacy Policy</a>.
 			</div>
 		</div>
-	);
+	)
 }

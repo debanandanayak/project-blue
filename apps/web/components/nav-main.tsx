@@ -1,13 +1,13 @@
-'use client';
+'use client'
 
-import { ChevronRight } from 'lucide-react';
-import Link from 'next/link';
-import { useParams } from 'next/navigation';
+import { ChevronRight } from 'lucide-react'
+import Link from 'next/link'
+import { useParams } from 'next/navigation'
 import {
 	Collapsible,
 	CollapsibleContent,
 	CollapsibleTrigger,
-} from '@/components/ui/collapsible';
+} from '@/components/ui/collapsible'
 import {
 	SidebarGroup,
 	SidebarGroupLabel,
@@ -18,23 +18,23 @@ import {
 	SidebarMenuSub,
 	SidebarMenuSubButton,
 	SidebarMenuSubItem,
-} from '@/components/ui/sidebar';
+} from '@/components/ui/sidebar'
 
 export function NavMain({
 	items,
 }: {
 	items: {
-		title: string;
-		url: string;
-		icon: string;
-		isActive?: boolean;
+		title: string
+		url: string
+		icon: string
+		isActive?: boolean
 		items?: {
-			title: string;
-			url: string;
-		}[];
-	}[];
+			title: string
+			url: string
+		}[]
+	}[]
 }) {
-	const { slug } = useParams();
+	const { slug } = useParams()
 
 	return (
 		<SidebarGroup>
@@ -77,5 +77,5 @@ export function NavMain({
 				))}
 			</SidebarMenu>
 		</SidebarGroup>
-	);
+	)
 }

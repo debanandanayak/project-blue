@@ -1,29 +1,25 @@
-import type {
-	FormErrors,
-	FormProps,
-	PartialValues,
-} from '@modular-forms/solid';
+import type { FormErrors, FormProps, PartialValues } from '@modular-forms/solid'
 import {
 	createForm as createModularForm,
 	FormError,
 	valiForm,
-} from '@modular-forms/solid';
-import type * as v from 'valibot';
-import { createHook } from '../hooks/hooks';
+} from '@modular-forms/solid'
+import type * as v from 'valibot'
+import { createHook } from '../hooks/hooks'
 
 export function createForm<Schema extends v.ObjectSchema<any, any>>({
 	schema,
 	initialValues,
 	onSubmit,
 }: {
-	schema: Schema;
-	initialValues?: PartialValues<v.InferInput<Schema>>;
-	onSubmit?: (values: v.InferInput<Schema>) => Promise<void>;
+	schema: Schema
+	initialValues?: PartialValues<v.InferInput<Schema>>
+	onSubmit?: (values: v.InferInput<Schema>) => Promise<void>
 }) {
-	const submitHook = createHook<v.InferInput<Schema>>();
+	const submitHook = createHook<v.InferInput<Schema>>()
 
 	if (onSubmit) {
-		submitHook.on(onSubmit);
+		submitHook.on(onSubmit)
 	}
 
 	const [form, { Form, Field, FieldArray }] = createModularForm<
@@ -31,7 +27,7 @@ export function createForm<Schema extends v.ObjectSchema<any, any>>({
 	>({
 		validate: valiForm(schema),
 		initialValues,
-	});
+	})
 
 	return {
 		form,
@@ -45,8 +41,8 @@ export function createForm<Schema extends v.ObjectSchema<any, any>>({
 			message,
 			fields,
 		}: {
-			message: string;
-			fields?: FormErrors<v.InferInput<Schema>>;
+			message: string
+			fields?: FormErrors<v.InferInput<Schema>>
 		}) => new FormError<v.InferInput<Schema>>(message, fields),
-	};
+	}
 }

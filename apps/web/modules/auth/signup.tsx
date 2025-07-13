@@ -1,8 +1,8 @@
-import { GalleryVerticalEnd } from 'lucide-react';
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
-import SignupForm from './signup-form';
+import { GalleryVerticalEnd } from 'lucide-react'
+import Link from 'next/link'
+import { Button } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
+import SignupForm from './signup-form'
 
 export function Signup({ className, ...props }: React.ComponentProps<'div'>) {
 	return (
@@ -55,5 +55,5 @@ export function Signup({ className, ...props }: React.ComponentProps<'div'>) {
 				and <a href="#">Privacy Policy</a>.
 			</div>
 		</div>
-	);
+	)
 }

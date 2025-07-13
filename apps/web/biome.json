@@ -15,7 +15,11 @@
 	"linter": {
 		"enabled": true,
 		"rules": {
-			"recommended": true
+			"recommended": true,
+			"correctness": {
+				"noUnusedImports": "off",
+				"noUnusedVariables": "off"
+			}
 		},
 		"domains": {
 			"next": "recommended"
@@ -23,7 +27,8 @@
 	},
 	"javascript": {
 		"formatter": {
-			"quoteStyle": "single"
+			"quoteStyle": "single",
+			"semicolons": "asNeeded"
 		}
 	},
 	"assist": {

@@ -1,18 +1,18 @@
-import type { ComponentProps, ParentComponent } from 'solid-js';
-import { createSignal } from 'solid-js';
-import { Button } from '@/modules/ui/components/button';
+import type { ComponentProps, ParentComponent } from 'solid-js'
+import { createSignal } from 'solid-js'
+import { Button } from '@/modules/ui/components/button'
 
 export function useCopy() {
-	const [getIsJustCopied, setIsJustCopied] = createSignal(false);
+	const [getIsJustCopied, setIsJustCopied] = createSignal(false)
 
 	const copy = ({ text }: { text: string }) => {
 		navigator.clipboard.writeText(text).then(() => {
-			setIsJustCopied(true);
-			setTimeout(() => setIsJustCopied(false), 2000);
-		});
-	};
+			setIsJustCopied(true)
+			setTimeout(() => setIsJustCopied(false), 2000)
+		})
+	}
 
-	return { copy, getIsJustCopied };
+	return { copy, getIsJustCopied }
 }
 
 export const CopyButton: ParentComponent<
@@ -20,7 +20,7 @@ export const CopyButton: ParentComponent<
 		typeof Button
 	>
 > = (props) => {
-	const { copy, getIsJustCopied } = useCopy();
+	const { copy, getIsJustCopied } = useCopy()
 
 	return (
 		<Button onClick={() => copy({ text: props.text })} {...props}>
@@ -35,5 +35,5 @@ export const CopyButton: ParentComponent<
 				? (props.copiedLabel ?? 'Copied!')
 				: (props.children ?? props.label ?? 'Copy')}
 		</Button>
-	);
-};
+	)
+}
