@@ -1,24 +1,24 @@
-import { createMiddleware } from 'hono/factory';
-import { getHeader } from '../headers/headers.models';
-import { generateId } from '../random/ids';
-import { createLogger, wrapWithLoggerContext } from './logger';
+import { createMiddleware } from 'hono/factory'
+import { getHeader } from '../headers/headers.models'
+import { generateId } from '../random/ids'
+import { createLogger, wrapWithLoggerContext } from './logger'
 
-const logger = createLogger({ namespace: 'app' });
+const logger = createLogger({ namespace: 'app' })
 
 export function createLoggerMiddleware() {
 	return createMiddleware(async (context, next) => {
-		const requestId = getHeader({ context, name: 'x-request-id' });
+		const requestId = getHeader({ context, name: 'x-request-id' })
 
 		await wrapWithLoggerContext(
 			{
 				requestId: requestId ?? generateId({ prefix: 'req' }),
 			},
 			async () => {
-				const requestedAt = new Date();
+				const requestedAt = new Date()
 
-				await next();
+				await next()
 
-				const durationMs = new Date().getTime() - requestedAt.getTime();
+				const durationMs = Date.now() - requestedAt.getTime()
 
 				logger.info(
 					{
@@ -30,8 +30,8 @@ export function createLoggerMiddleware() {
 						durationMs,
 					},
 					'Request completed',
-				);
+				)
 			},
-		);
-	});
+		)
+	})
 }

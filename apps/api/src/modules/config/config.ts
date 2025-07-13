@@ -1,13 +1,13 @@
-import process from 'node:process';
-import { safelySync } from '@corentinth/chisels';
-import { loadConfig } from 'c12';
-import type { ConfigDefinition } from 'figue';
-import { defineConfig } from 'figue';
-import { memoize } from 'lodash-es';
-import { z } from 'zod';
-import { authConfig } from '../app/auth/auth.config';
-import { createLogger } from '../shared/logger/logger';
-import { booleanishSchema, trustedOriginsSchema } from './config.schemas';
+import process from 'node:process'
+import { safelySync } from '@corentinth/chisels'
+import { loadConfig } from 'c12'
+import type { ConfigDefinition } from 'figue'
+import { defineConfig } from 'figue'
+import { memoize } from 'lodash-es'
+import { z } from 'zod'
+import { authConfig } from '../app/auth/auth.config'
+import { createLogger } from '../shared/logger/logger'
+import { booleanishSchema, trustedOriginsSchema } from './config.schemas'
 
 export const configDefinition = {
 	env: {
@@ -68,14 +68,14 @@ export const configDefinition = {
 	},
 
 	auth: authConfig,
-} as const satisfies ConfigDefinition;
+} as const satisfies ConfigDefinition
 
-const logger = createLogger({ namespace: 'config' });
+const logger = createLogger({ namespace: 'config' })
 
 export async function parseConfig({
 	env = process.env,
 }: {
-	env?: Record<string, string | undefined>;
+	env?: Record<string, string | undefined>
 } = {}) {
 	const { config: configFromFile } = await loadConfig({
 		name: 'papra',
@@ -85,32 +85,32 @@ export async function parseConfig({
 		packageJson: false,
 		envName: false,
 		cwd: env.PAPRA_CONFIG_DIR ?? process.cwd(),
-	});
+	})
 
 	const [configResult, configError] = safelySync(() =>
 		defineConfig(configDefinition, {
 			envSource: env,
 			defaults: configFromFile,
 		}),
-	);
+	)
 
 	if (configError) {
 		logger.error(
 			{ error: configError },
 			`Invalid config: ${configError.message}`,
-		);
-		process.exit(1);
+		)
+		process.exit(1)
 	}
 
-	const { config } = configResult;
+	const { config } = configResult
 
-	return { config };
+	return { config }
 }
 
 // Permit to load the default config, regardless of environment variables, and config files
 // memoized to avoid re-parsing the config definition
 export const loadDryConfig = memoize(() => {
-	const { config } = defineConfig(configDefinition);
+	const { config } = defineConfig(configDefinition)
 
-	return { config };
-});
+	return { config }
+})

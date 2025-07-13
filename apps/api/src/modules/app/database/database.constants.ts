@@ -1,1 +1,1 @@
-export const ID_RANDOM_PART_LENGTH = 24;
+export const ID_RANDOM_PART_LENGTH = 24

@@ -1,6 +1,6 @@
-import type { DeepPartial } from '@corentinth/chisels';
-import { merge, pick } from 'lodash-es';
-import type { Config } from './config.types';
+import type { DeepPartial } from '@corentinth/chisels'
+import { merge, pick } from 'lodash-es'
+import type { Config } from './config.types'
 
 export function getPublicConfig({ config }: { config: Config }) {
 	const publicConfig: DeepPartial<Config> = merge(
@@ -25,9 +25,9 @@ export function getPublicConfig({ config }: { config: Config }) {
 				},
 			},
 		},
-	);
+	)
 
 	return {
 		publicConfig,
-	};
+	}
 }

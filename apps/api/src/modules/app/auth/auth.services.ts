@@ -1,19 +1,19 @@
-import type { PrismaClient } from '@prisma/client';
-import { betterAuth } from 'better-auth';
-import { prismaAdapter } from 'better-auth/adapters/prisma';
-import { genericOAuth } from 'better-auth/plugins';
-import type { Config } from '../../config/config.types';
-import { createLogger } from '../../shared/logger/logger';
-import { getTrustedOrigins } from './auth.models';
+import type { PrismaClient } from '@prisma/client'
+import { betterAuth } from 'better-auth'
+import { prismaAdapter } from 'better-auth/adapters/prisma'
+import { genericOAuth } from 'better-auth/plugins'
+import type { Config } from '../../config/config.types'
+import { createLogger } from '../../shared/logger/logger'
+import { getTrustedOrigins } from './auth.models'
 
-export type Auth = ReturnType<typeof getAuth>['auth'];
+export type Auth = ReturnType<typeof getAuth>['auth']
 
-const logger = createLogger({ namespace: 'auth' });
+const logger = createLogger({ namespace: 'auth' })
 
 export function getAuth({ db, config }: { db: PrismaClient; config: Config }) {
-	const { secret } = config.auth;
+	const { secret } = config.auth
 
-	const { trustedOrigins } = getTrustedOrigins({ config });
+	const { trustedOrigins } = getTrustedOrigins({ config })
 
 	const auth = betterAuth({
 		secret,
@@ -24,9 +24,9 @@ export function getAuth({ db, config }: { db: PrismaClient; config: Config }) {
 			log: (baseLevel, message) => {
 				const level = (
 					baseLevel in logger ? baseLevel : 'info'
-				) as keyof typeof logger;
+				) as keyof typeof logger
 
-				logger[level](message);
+				logger[level](message)
 			},
 		},
 		emailAndPassword: {
@@ -48,7 +48,7 @@ export function getAuth({ db, config }: { db: PrismaClient; config: Config }) {
 			user: {
 				create: {
 					after: async (user) => {
-						logger.info({ userId: user.id }, 'User signed up');
+						logger.info({ userId: user.id }, 'User signed up')
 					},
 				},
 			},
@@ -78,9 +78,9 @@ export function getAuth({ db, config }: { db: PrismaClient; config: Config }) {
 				? [genericOAuth({ config: config.auth.providers.customs })]
 				: []),
 		],
-	});
+	})
 
 	return {
 		auth,
-	};
+	}
 }

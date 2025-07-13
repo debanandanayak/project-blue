@@ -1,12 +1,12 @@
-import type { ConfigDefinition } from 'figue';
-import { z } from 'zod';
+import type { ConfigDefinition } from 'figue'
+import { z } from 'zod'
 
 export const booleanishSchema = z.coerce
 	.string()
 	.trim()
 	.toLowerCase()
 	.transform((x) => ['true', '1'].includes(x))
-	.pipe(z.boolean());
+	.pipe(z.boolean())
 
 export const trustedOriginsSchema = z.union([
 	z.array(z.string().url()),
@@ -14,14 +14,14 @@ export const trustedOriginsSchema = z.union([
 		.string()
 		.transform((value) => value.split(','))
 		.pipe(z.array(z.string().url())),
-]);
+])
 
 export function parseJson(content: string, ctx: z.RefinementCtx) {
 	try {
-		return JSON.parse(content);
+		return JSON.parse(content)
 	} catch (_error) {
-		ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'Invalid json' });
-		return z.never;
+		ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'Invalid json' })
+		return z.never
 	}
 }
 
@@ -44,7 +44,7 @@ const customOAuthProviderSchema = z.object({
 	discoveryUrl: z.string().optional(),
 	type: z.enum(['oauth2', 'oidc']).optional(),
 	authorizationUrl: z.string().optional(),
-});
+})
 
 export const authConfig = {
 	secret: {
@@ -139,4 +139,4 @@ export const authConfig = {
 			env: 'AUTH_PROVIDERS_CUSTOMS',
 		},
 	},
-} as const satisfies ConfigDefinition;
+} as const satisfies ConfigDefinition
