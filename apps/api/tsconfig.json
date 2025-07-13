@@ -6,6 +6,9 @@
     "lib": [
       "ESNext"
     ],
+    "paths": {
+      "@/*": ["./*"]
+    },
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "strict": true,
