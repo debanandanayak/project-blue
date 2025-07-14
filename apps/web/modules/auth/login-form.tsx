@@ -1,36 +1,42 @@
-'use client'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { Loader2Icon } from 'lucide-react'
-import { useRouter } from 'next/navigation'
-import { useFormStatus } from 'react-dom'
-import { useForm } from 'react-hook-form'
-import type z from 'zod'
-import { Button } from '@/components/ui/button'
+"use client"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { Loader2Icon } from "lucide-react"
+import { useRouter } from "next/navigation"
+import { useForm } from "react-hook-form"
+import { toast } from "sonner"
+import type z from "zod"
+import { Button } from "@/components/ui/button"
 import {
 	Form,
 	FormControl,
-	FormDescription,
 	FormField,
 	FormItem,
 	FormLabel,
 	FormMessage,
-} from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
-import { loginSchema } from './auth.schema'
+} from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
+import { loginSchema } from "./auth.schema"
+import { signIn } from "./auth.services"
 export default function EmailPasswordLoginForm() {
 	const form = useForm<z.infer<typeof loginSchema>>({
 		resolver: zodResolver(loginSchema),
 		defaultValues: {
-			email: '',
-			password: '',
+			email: "",
+			password: "",
 		},
 	})
 	const router = useRouter()
 	async function onSubmit(values: z.infer<typeof loginSchema>) {
-		console.log('clicked')
-		await new Promise((resolve) => setTimeout(resolve, 200))
-		console.log(values)
-		router.replace('/')
+		const { error, data } = await signIn.email({
+			email: values.email,
+			password: values.password,
+		})
+		console.log(error, data)
+		if (error?.message) {
+			toast.error(error.message)
+		} else {
+			router.replace("/")
+		}
 	}
 
 	return (
@@ -61,7 +67,7 @@ export default function EmailPasswordLoginForm() {
 									<div className="flex items-center">
 										<FormLabel>Password</FormLabel>
 										<a
-											href="#"
+											href="forgot-password"
 											className="ml-auto text-sm leading-none font-medium underline-offset-2 hover:underline"
 										>
 											Forgot your password?
@@ -87,20 +93,11 @@ export default function EmailPasswordLoginForm() {
 								<Loader2Icon className="animate-spin" />
 							</>
 						) : (
-							'Login'
+							"Login"
 						)}
 					</Button>
 				</div>
 			</form>
 		</Form>
-	)
-}
-
-function LoginButton() {
-	const { pending } = useFormStatus()
-	return (
-		<Button type="submit" className="w-full">
-			{pending ? <Loader2Icon className="animate-spin" /> : 'Login'}
-		</Button>
 	)
 }

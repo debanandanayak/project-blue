@@ -16,6 +16,8 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { loginSchema } from './auth.schema'
+import { signUp } from './auth.services'
+import { toast } from 'sonner'
 export default function SignupForm() {
 	const form = useForm<z.infer<typeof loginSchema>>({
 		resolver: zodResolver(loginSchema),
@@ -26,10 +28,18 @@ export default function SignupForm() {
 	})
 	const router = useRouter()
 	async function onSubmit(values: z.infer<typeof loginSchema>) {
-		console.log('clicked')
-		await new Promise((resolve) => setTimeout(resolve, 200))
-		console.log(values)
-		router.replace('/')
+		const { error, data } = await signUp.email({
+			name: "deba",
+			email: values.email,
+			password: values.password,
+		})
+		console.log(error, data)
+		if (error?.message) {
+			toast.error(error.message)
+		} else {
+			toast.success(data?.user.email)
+			router.replace("/")
+		}
 	}
 
 	return (
