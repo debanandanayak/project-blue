@@ -1,10 +1,14 @@
-import { Hono } from 'hono'
-import client from '@/src/client'
-import { parseConfig } from '../config/config'
-import { createLoggerMiddleware } from '../shared/logger/logger.middleware'
-import { getAuth } from './auth/auth.services'
-import { registerRoutes } from './server.routes'
-import type { GlobalDependencies, ServerInstanceGenerics } from './server.types'
+import { Hono } from "hono"
+import client from "@/src/client"
+import { parseConfig } from "../config/config"
+import { createLoggerMiddleware } from "../shared/logger/logger.middleware"
+import { getAuth } from "./auth/auth.services"
+import { createCorsMiddleware } from "./middleware/cors.middleware"
+import { registerRoutes } from "./server.routes"
+import type {
+	GlobalDependencies,
+	ServerInstanceGenerics,
+} from "./server.types"
 
 async function createGlobalDependencies(
 	partialDeps: Partial<GlobalDependencies>,
@@ -24,7 +28,9 @@ export async function createServer(
 ) {
 	const app = new Hono<ServerInstanceGenerics>({ strict: true })
 	const dependencies = await createGlobalDependencies(initialDeps)
+	const { config } = dependencies
 	app.use(createLoggerMiddleware())
+	app.use(createCorsMiddleware({ config }))
 	registerRoutes({
 		app,
 		...dependencies,
